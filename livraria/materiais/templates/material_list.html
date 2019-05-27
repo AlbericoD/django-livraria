@@ -1,0 +1,51 @@
+{% extends "./base.html" %}
+{% block activeInitial %}  {% endblock %}
+{% block activeLivro %}  {% endblock %}
+{% block activeMaterial %} active {% endblock %}
+{% block content %}
+     <h1>Material Escolar</h1>
+        <table class="ui olive table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>R$</th>
+                <th>Detalhes</th>
+                <th>Editar</th>
+                <th>Deletar</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for material in object_list %}
+                    {% if material.get_promocao and material.get_quantidade_estoque > 0 %}
+                        <tr class="positive">
+                    {% elif material.get_quantidade_estoque < 0 or material.get_quantidade_paginas < 0 or material.get_valor < 0%}
+                        <tr class="error">
+                    {% elif material.get_quantidade_estoque == 0 %}
+                        <tr class="warning">
+                    {% else %}
+                        <tr>
+                    {% endif %}
+                        <td>{{ material.get_nome }}</td>
+                        <td>{{ material.get_categoria }}</td>
+                        <td>{{ material.get_valor }}</td>
+                        <td><a href="{% url "material_view" material.id %}"><i class="info icon"></i></a></td>
+                        <td><a href="{% url "material_edit" material.id %}"><i class="edit icon"></i></a></td>
+                        <td><a href="{% url "material_delete" material.id %}"><i class="eraser icon"></i></a></td>
+                    <tr>
+                {% endfor %}
+            </tbody>
+            <tfoot class="full-width">
+                <tr>
+                <th>Total de materiais cadastrados: {{ object_list | length }} </th>
+                <th></th>
+                <th></th>
+                <th colspan="4">
+                    <div class="ui right floated small primary labeled icon button">
+                        <a href="{% url "material_new" %}" style="color: white"> <i class="book icon"></i>  Adicionar Material</a> 
+                    </div>
+                </th>
+                </tr>
+            </tfoot>
+        </table>
+{% endblock %}

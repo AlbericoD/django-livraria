@@ -1,0 +1,51 @@
+{% extends "./base.html" %}
+{% block activeHome %}  {% endblock %}
+{% block activeLivro %} active {% endblock %}
+{% block activeMaterial %}{% endblock %}
+{% block content %}
+     <h1>Livros</h1>
+        <table class="ui orange table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Páginas</th>
+                <th>R$</th>
+                <th>Detalhes</th>
+                <th>Editar</th>
+                <th>Deletar</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for livro in object_list %}
+                    {% if livro.get_promocao and livro.get_quantidade_estoque > 0 %}
+                        <tr class="positive">
+                        {% elif livro.get_quantidade_estoque == 0 %}
+                            <tr class="warning">
+                        {% elif livro.get_quantidade_estoque < 0 or livro.get_quantidade_paginas < 0 or livro.get_valor < 0%}
+                            <tr class="error">
+                        {% else %}
+                            <tr>
+                        {% endif %} 
+                        <td>{{ livro.get_nome }}</td>
+                        <td>{{ livro.get_quantidade_paginas }}</td>
+                        <td>{{livro.get_valor}}</td>
+                        <td><a href="{% url "livro_view" livro.id %}"><i class="info icon"></i></a></td>
+                        <td><a href="{% url "livro_edit" livro.id %}"><i class="edit icon"></i></a></td>
+                        <td><a href="{% url "livro_delete" livro.id %}"><i class="eraser icon"></i></a></td>
+                    <tr>
+                {% endfor %}
+            </tbody>
+            <tfoot class="full-width">
+                <tr>
+                <th >Total de livros cadastrados: {{ object_list | length }} </th>
+                <th></th>
+                <th></th>
+                <th colspan="4">
+                    <div class="ui right floated small primary labeled icon button">
+                        <a href="{% url "livro_new" %}" style="color: white"> <i class="book icon"></i>  Adicionar Livro</a> 
+                    </div>
+                </th>
+                </tr>
+            </tfoot>
+        </table>
+{% endblock %}

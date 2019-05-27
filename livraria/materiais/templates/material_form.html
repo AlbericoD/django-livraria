@@ -1,0 +1,12 @@
+{% extends "./base.html" %} {% block activeLivro %} {% endblock %} {% block activeMaterial %} active
+{% endblock %} {% block content %}
+<div class="ui segment">
+  <div class="ui container">
+    <form class="ui form" method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button class="ui button" type="submit">Confirmar</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

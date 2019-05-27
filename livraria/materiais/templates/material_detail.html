@@ -1,0 +1,22 @@
+{% extends "./base.html" %} {% block activeLivro %} {% endblock %} {% block activeMaterial %} active
+{% endblock %} {% block content %}
+<h1>Detalhes</h1>
+<div class="ui card">
+  <div class="content">
+    <div class="header">{{ object.get_nome }}</div>
+    <div class="meta">Categoria: {{ object.get_categoria }}</div>
+    <div class="description">
+      <p>{{ object.get_descricao }}</p>
+    </div>
+  </div>
+  <div class="extra content">
+    <div class="left floated author">
+      <p style="color:purple">Estoque: {{ object.get_quantidade_estoque }} <b>UN</b></p>
+    </div>
+    <div class="right floated author">
+      <p style="color:green">R$ {{ object.get_valor }}</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

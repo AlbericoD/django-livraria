@@ -1,0 +1,13 @@
+{% extends "./base.html" %} {% block activeLivro %} {% endblock %} {% block activeMaterial %} active
+{% endblock %} {%block content %}
+<h1>Deletar Material</h1>
+<form method="post">
+  <div class="ui form warning">
+    <div class="ui warning message">
+      <div class="header">Atenção</div>
+      <p>{% csrf_token %} Tem certeza que deseja deletar o material: "{{ object }}" ?</p>
+    </div>
+    <button type="submit" class="ui submit red button">Vai</button>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "./base.html" %} {% block content %}
+<h1>Detalhes</h1>
+<div class="ui card">
+  <div class="content">
+    <div class="header">{{ object.nome }}</div>
+    <div class="meta">{{ object.quantidade_paginas }} paginas</div>
+    <div class="description">
+      <p>{{ object.descricao }}</p>
+    </div>
+  </div>
+  <div class="extra content">
+    <div class="left floated author">
+      <p style="color:purple">Estoque: {{ object.quantidade_estoque }} <b>UN</b></p>
+    </div>
+    <div class="right floated author">
+      <p style="color:green">R$ {{ object.valor }}</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

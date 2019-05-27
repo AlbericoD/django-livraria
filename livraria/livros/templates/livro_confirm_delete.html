@@ -1,0 +1,12 @@
+{% extends "./base.html" %} {% block content %}
+<h1>Deletar Livro</h1>
+<form method="post">
+  <div class="ui form warning">
+    <div class="ui warning message">
+      <div class="header">Atenção</div>
+      <p>{% csrf_token %} Tem certeza que deseja deletar o livro: "{{ object }}" ?</p>
+    </div>
+    <button type="submit" class="ui submit red button">Vai</button>
+  </div>
+</form>
+{% endblock %}
